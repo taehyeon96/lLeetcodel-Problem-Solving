@@ -40,40 +40,40 @@
 '''
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:        
-        arr = []
+#         arr = []
         
-        while 1:
-            arr.append(head.val)
+#         while 1:
+#             arr.append(head.val)
             
-            if head.next == None: break   # while조건으로 두면 마지막 노드는 무시되어버림
+#             if head.next == None: break   # while조건으로 두면 마지막 노드는 무시되어버림
                 
-            head = head.next
+#             head = head.next
             
-        if arr == arr[::-1]:   # 리스트 vs 리스트역순이 같으면 true
-            return True
-        else:
-            return False
+#         if arr == arr[::-1]:   # 리스트 vs 리스트역순이 같으면 true
+#             return True
+#         else:
+#             return False
 
-#         # 솔루션 - 런너(runner)를 이용한 풀이
-#         reversn = None
-#         slow = fast = head
+        # 솔루션 - 런너(runner)를 이용한 풀이
+        reversn = None
+        slow = fast = head
         
-#         while fast and fast.next:
-#             # fast는 두 칸 이동
-#             fast = fast.next.next
+        while fast and fast.next:
+            # fast는 두 칸 이동
+            fast = fast.next.next
             
-#             # 리버스 링크드리스트 생성과 동시에 slow는 한 칸 이동 (동시할당해야 시간초과X 주의)
-#             reversn, reversn.next, slow = slow, reversn, slow.next
+            # 리버스 링크드리스트 생성과 동시에 slow는 한 칸 이동 (동시할당해야 같은 값을 참조안함 주의-딥카피같은)
+            reversn, reversn.next, slow = slow, reversn, slow.next
             
-#         # 링크드리스트의 길이가 홀수인 경우 주의(slow를 한칸 더 이동해서 중앙 맞춰줌)
-#         if fast:
-#             slow = slow.next
+        # 링크드리스트의 길이가 홀수인 경우 주의(slow를 한칸 더 이동해서 중앙 맞춰줌)
+        if fast:
+            slow = slow.next
             
-#         # 팰린드롬 여부 확인
-#         while reversn and reversn.val == slow.val:
-#             slow, reversn = slow.next, reversn.next    # 한칸씩 이동
+        # 팰린드롬 여부 확인
+        while reversn and reversn.val == slow.val:
+            slow, reversn = slow.next, reversn.next    # 한칸씩 이동
             
-#         return not reversn
+        return not reversn
         
     
     
