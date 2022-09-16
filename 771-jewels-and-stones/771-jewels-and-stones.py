@@ -52,25 +52,25 @@ class Solution:
 #         return ans
 
         
-        # 3) 책 솔루션 - defaultdict를 이용한 불필요한 비교 생략
-        from collections import defaultdict
+#         # 3) 책 솔루션 - defaultdict를 이용한 불필요한 비교 생략
+#         from collections import defaultdict
         
-        freqs = defaultdict(int)
-        ans = 0
+#         freqs = defaultdict(int)
+#         ans = 0
         
-        # 돌(s)의 빈도수 계산 = Counter 직접구현 (= 딕셔너리 생성 방법 중요!)
-        for char in stones:
-            freqs[char] += 1
-        print(freqs)
-        # 보석(j)의 빈도수 합산
-        for char in jewels:
-            ans += freqs[char]
+#         # 돌(s)의 빈도수 계산 = Counter 직접구현 (= 딕셔너리 생성 방법 중요!)
+#         for char in stones:
+#             freqs[char] += 1
+#         print(freqs)
+#         # 보석(j)의 빈도수 합산
+#         for char in jewels:
+#             ans += freqs[char]
             
-        return ans        
+#         return ans        
                 
                 
-#         # 4) 책 솔루션 - 파이썬다운 방식 (해시테이블X)
-#         print(list(i for i in stones))
-#         print(list(i in jewels for i in stones))
-#         return sum(i in jewels for i in stones)
+        # 4) 책 솔루션 - 파이썬다운 방식 (해시테이블X)
+        print(list(i for i in stones))
+        print(list(i in jewels for i in stones))
+        return sum(i in jewels for i in stones)
                 
