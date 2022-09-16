@@ -15,23 +15,23 @@ jewels에 있는게 한 묶음으로 보석이 아니라, 개별적으로 보석
 
 '''
 
-from collections import Counter
+# from collections import Counter
 
 class Solution:
     def numJewelsInStones(self, jewels: str, stones: str) -> int:
         
-        # 1-1) 내가 푼 방식 1 - Counter 사용 (책 솔루션과 동일)
-        ans = 0
-        c = Counter(stones)    # Counter({'b': 4, 'A': 2, 'a': 1})
+#         # 1-1) 내가 푼 방식 1 - Counter 사용 (책 솔루션과 동일)
+#         ans = 0
+#         c = Counter(stones)    # Counter({'b': 4, 'A': 2, 'a': 1})
         
-        for i in jewels:            
-            ans += c[i]
+#         for i in jewels:            
+#             ans += c[i]
             
-        return ans
+#         return ans
 
 
-#         # 1-2) 내가 푼 방식 2 - 파이썬다운 브루트포스 (책에 딕셔너리 안써도 된다는거 보고 푼)
-#         return len([i for i in jewels for j in stones if i == j])
+        # 1-2) 내가 푼 방식 2 - 파이썬다운 브루트포스 (책에 딕셔너리 안써도 된다는거 보고 푼)
+        return len([i for i in jewels for j in stones if i == j])
         
 
 #         # 2) 책 솔루션 - Counter 쓰지 않고 직접 해시테이블 생성
