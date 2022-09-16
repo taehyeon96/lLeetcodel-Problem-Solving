@@ -34,39 +34,39 @@ class Solution:
 #         return len([i for i in jewels for j in stones if i == j])
         
 
-        # 2) 책 솔루션 - Counter 쓰지 않고 직접 해시테이블 생성
-        freqs = {}
-        ans = 0
-        
-        # 돌(s)의 빈도수 계산 = Counter 직접구현 (= 딕셔너리 생성 방법 중요!)
-        for char in stones:
-            if char not in freqs:  # 없으면 새롭게 추가
-                freqs[char] = 1
-            else:
-                freqs[char] += 1
-                
-        # 보석(j)의 빈도수 합산
-        for char in jewels:
-            if char in freqs:
-                ans += freqs[char]
-        return ans
-
-        
-#         # 3) 책 솔루션 - defaultdict를 이용한 불필요한 비교 생략
-#         from collections import defaultdict
-        
-#         freqs = defaultdict(int)
+#         # 2) 책 솔루션 - Counter 쓰지 않고 직접 해시테이블 생성
+#         freqs = {}
 #         ans = 0
         
 #         # 돌(s)의 빈도수 계산 = Counter 직접구현 (= 딕셔너리 생성 방법 중요!)
 #         for char in stones:
-#             freqs[char] += 1
-#         print(freqs)
+#             if char not in freqs:  # 없으면 새롭게 추가
+#                 freqs[char] = 1
+#             else:
+#                 freqs[char] += 1
+                
 #         # 보석(j)의 빈도수 합산
 #         for char in jewels:
-#             ans += freqs[char]
+#             if char in freqs:
+#                 ans += freqs[char]
+#         return ans
+
+        
+        # 3) 책 솔루션 - defaultdict를 이용한 불필요한 비교 생략
+        from collections import defaultdict
+        
+        freqs = defaultdict(int)
+        ans = 0
+        
+        # 돌(s)의 빈도수 계산 = Counter 직접구현 (= 딕셔너리 생성 방법 중요!)
+        for char in stones:
+            freqs[char] += 1
+        print(freqs)
+        # 보석(j)의 빈도수 합산
+        for char in jewels:
+            ans += freqs[char]
             
-#         return ans        
+        return ans        
                 
                 
 #         # 4) 책 솔루션 - 파이썬다운 방식 (해시테이블X)
