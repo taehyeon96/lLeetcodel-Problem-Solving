@@ -70,7 +70,5 @@ class Solution:
                 
                 
         # 4) 책 솔루션 - 파이썬다운 방식 (해시테이블X)
-        print(list(i for i in stones))
-        print(list(i in jewels for i in stones))
         return sum(i in jewels for i in stones)
                 
