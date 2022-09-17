@@ -21,38 +21,38 @@ class Solution:
             
     def numIslands(self, graph: List[List[str]]) -> int:       
         
-        def bfs(i, j):
-            que = deque()
-            que.append((i, j))
-            graph[i][j] = '0'     # visit check
-
-            dy, dx = [-1, 0, 1, 0], [0, -1, 0, 1]    # 상 좌 하 우
-
-            while que:
-                y, x = map(int, que.popleft())
-
-                for i in range(4):
-                    ny, nx = y + dy[i], x + dx[i]
-
-                    if 0<=ny and ny < len(graph) and 0<=nx and nx < len(graph[0]) and graph[ny][nx] == '1':
-                        graph[ny][nx] = '0'
-                        que.append((ny,nx))
-
-#         def dfs(y, x):
-#             graph[y][x] = '0'     # visit check
+#         def bfs(i, j):
+#             que = deque()
+#             que.append((i, j))
+#             graph[i][j] = '0'     # visit check
 
 #             dy, dx = [-1, 0, 1, 0], [0, -1, 0, 1]    # 상 좌 하 우
-            
-#             for i in range(4):
-#                 ny, nx = y + dy[i], x + dx[i]
 
-#                 if 0<=ny and ny < len(graph) and 0<=nx and nx < len(graph[0]) and graph[ny][nx] == '1':
-#                     dfs(ny, nx)
+#             while que:
+#                 y, x = map(int, que.popleft())
+
+#                 for i in range(4):
+#                     ny, nx = y + dy[i], x + dx[i]
+
+#                     if 0<=ny and ny < len(graph) and 0<=nx and nx < len(graph[0]) and graph[ny][nx] == '1':
+#                         graph[ny][nx] = '0'
+#                         que.append((ny,nx))
+
+        def dfs(y, x):
+            graph[y][x] = '0'     # visit check
+
+            dy, dx = [-1, 0, 1, 0], [0, -1, 0, 1]    # 상 좌 하 우
+            
+            for i in range(4):
+                ny, nx = y + dy[i], x + dx[i]
+
+                if 0<=ny and ny < len(graph) and 0<=nx and nx < len(graph[0]) and graph[ny][nx] == '1':
+                    dfs(ny, nx)
 
         ans = 0
         for y in range(len(graph)):
             for x in range(len(graph[0])):
                 if graph[y][x] == '1':
-                    bfs(y, x)
+                    dfs(y, x)
                     ans += 1
         return ans
