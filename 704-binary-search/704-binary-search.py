@@ -15,29 +15,29 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
         
-#         # 2) 기본 바이너리 서치 구현
-#         start = 0
-#         end = len(nums)-1
+        # 2) 기본 바이너리 서치 구현
+        start = 0
+        end = len(nums)-1
         
-#         while start <= end:
-#             pivot = (start+end) // 2
+        while start <= end:
+            pivot = (start+end) // 2
             
-#             if target < nums[pivot]:
-#                 end = pivot - 1
-#             elif nums[pivot] < target:
-#                 start = pivot + 1
-#             else:
-#                 return pivot
+            if target < nums[pivot]:
+                end = pivot - 1
+            elif nums[pivot] < target:
+                start = pivot + 1
+            else:
+                return pivot
             
-#         return -1
+        return -1
         
-        # 1) 라이브러리 사용
-        from bisect import bisect_left
+#         # 1) 라이브러리 사용
+#         from bisect import bisect_left
         
-        index = bisect_left(nums, target)
+#         index = bisect_left(nums, target)
         
-        if index < len(nums) and nums[index] == target:
-            return index
-        else:
-            return -1
+#         if index < len(nums) and nums[index] == target:
+#             return index
+#         else:
+#             return -1
         
