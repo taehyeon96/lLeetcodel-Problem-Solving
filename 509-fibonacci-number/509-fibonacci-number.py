@@ -1,10 +1,16 @@
 class Solution:
     
-    # (중요) 클래스에서 global 변수는 여기에 선언
     global arr
     arr = [0] * 31   # n의 범위가 30까지이므로
     
     def fib(self, n: int) -> int:
+        
+#         # 3번) <중요> 두 변수만 이용해 공간 절약 (시간복잡도는 O(n)으로 동일, 공간복잡도는 O(1))
+#         x, y = 0, 1
+        
+#         for i in range(0, n):
+#             x, y = y, x + y
+#         return x
         
         # 1번) 타뷸레이션 (bottom-up) : 테이블을 앞으로 만들어나가는 방법
         
