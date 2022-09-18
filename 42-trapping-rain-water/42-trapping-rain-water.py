@@ -57,30 +57,46 @@ class Solution:
         
 #         return water
     
-        # 책 솔루션 - 투포인터
-        if len(height) < 1:
-            return 0
+#         # 책 솔루션 - 투포인터
+#         if len(height) < 1:
+#             return 0
 
-        water = 0
-        left = 0
-        right = len(height) - 1
+#         water = 0
+#         left = 0
+#         right = len(height) - 1
 
-        left_max = height[left]
-        right_max = height[right]
+#         left_max = height[left]
+#         right_max = height[right]
 
-        while left < right:
-            left_max = max(height[left], left_max)
-            right_max = max(height[right], right_max)
+#         while left < right:
+#             left_max = max(height[left], left_max)
+#             right_max = max(height[right], right_max)
 
-            if left_max <= right_max:
-                water += left_max - height[left]
-                left += 1
-            else:
-                water += right_max - height[right]
-                right -= 1
+#             if left_max <= right_max:
+#                 water += left_max - height[left]
+#                 left += 1
+#             else:
+#                 water += right_max - height[right]
+#                 right -= 1
 
-        return water
-            
-            
-            
-            
+#         return water
+    
+        # 책 솔루션 - 스택 사용
+        stack = []
+        volume = 0
+
+        for i in range(len(height)):
+            while stack and height[i] > height[stack[-1]]:
+                top = stack.pop()
+
+                if not len(stack):
+                    break
+
+                distance = i - stack[-1] - 1
+                waters = min(height[i], height[stack[-1]]) - height[top]
+
+                volume += distance * waters
+
+            stack.append(i)
+
+        return volume
