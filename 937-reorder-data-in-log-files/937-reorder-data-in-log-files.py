@@ -40,36 +40,40 @@ Output: ["let1 art can",
 '''
 class Solution:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        # 내가 푼
+#         tmp = [list(map(str, i.split())) for i in logs] # 내용물을 리스트로 바꾸는
+#         print("과정-->", tmp)
         
-        tmp = [list(map(str, i.split())) for i in logs] # 내용물을 리스트로 바꾸는
-        
-        text = []
-        num = []
-        for i in tmp:
-            if i[1].isalpha():
-                text.append(i)
-            else:
-                num.append(i)
-        
-        text.sort(key = lambda x:(x[1:], x[0]))    # <---(중요) x[1:] 이게되네 ㄷㄷㄷ
-        
-        ans = [" ".join(i) for i in (text + num)]  # <---(중요) 이게되네 ㄷㄷㄷ
-        
-        return ans
-        
-#         # 책 솔루션 (큰 알고리즘은 나와 같음)
-#         letters, digits = [], []
-#         for log in logs:
-#             if log.split()[1].isdigit():
-#                 digits.append(log)
+#         text = []
+#         num = []
+#         for i in tmp:
+#             if i[1].isalpha():
+#                 text.append(i)
 #             else:
-#                 letters.append(log)
+#                 num.append(i)
         
-#         letters.sort(key = lambda x: (x.split()[1:], x.split()[0]))
+#         print("과정-->", text)
+#         print("과정-->", num)
         
-#         return letters + digits
+#         text.sort(key = lambda x:(x[1:], x[0]))    # <---(중요) x[1:] 이게되네 ㄷㄷㄷ
         
+#         print("과정-->", text)
         
+#         ans = [" ".join(i) for i in (text + num)]  # <---(중요) 이게되네 ㄷㄷㄷ
         
+#         print("정답-->", ans)
+#         print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
+#         return ans
         
+        # 책 솔루션 (큰 알고리즘은 나와 같음)
+        letters, digits = [], []
+        for log in logs:
+            if log.split()[1].isdigit():
+                digits.append(log)
+            else:
+                letters.append(log)
         
+        letters.sort(key = lambda x: (x.split()[1:], x.split()[0]))
+        
+        return letters + digits
+       
