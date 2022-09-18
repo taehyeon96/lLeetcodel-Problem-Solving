@@ -35,28 +35,50 @@ for i in range(len() to mm):
 '''
 
 class Solution:
-    def trap(self, arr: List[int]) -> int:
-        left, right = 0, len(arr)-1
+    def trap(self, height: List[int]) -> int:
+#         left, right = 0, len(arr)-1
         
-        mm = arr.index(max(arr))        # (중요!!!) max의 인덱스를 저장해야함
+#         mm = arr.index(max(arr))        # (중요!!!) max의 인덱스를 저장해야함
+#         water = 0
+        
+#         # 왼쪽 투포인터 진행
+#         for i in range(0, mm + 1):
+#             if arr[left] > arr[i]:
+#                 water += (arr[left] - arr[i])
+#             elif arr[left] <= arr[i]:
+#                 left = i        
+        
+#         # 오른쪽 투포인터 진행
+#         for i in range(right, mm, -1):
+#             if arr[right] > arr[i]:
+#                 water += (arr[right] - arr[i])
+#             elif arr[right] <= arr[i]:
+#                 right = i
+        
+#         return water
+    
+        # 책 솔루션 - 투포인터
+        if len(height) < 1:
+            return 0
+
         water = 0
-        
-        # 왼쪽 투포인터 진행
-        for i in range(0, mm + 1):
-            print(left, arr[left], "||", i, arr[i], "||", water)
-            if arr[left] > arr[i]:
-                water += (arr[left] - arr[i])
-            elif arr[left] <= arr[i]:
-                left = i        
-        
-        # 오른쪽 투포인터 진행
-        for i in range(right, mm, -1):
-            print(left, arr[left], "||", i, arr[i], "||", water)
-            if arr[right] > arr[i]:
-                water += (arr[right] - arr[i])
-            elif arr[right] <= arr[i]:
-                right = i
-        
+        left = 0
+        right = len(height) - 1
+
+        left_max = height[left]
+        right_max = height[right]
+
+        while left < right:
+            left_max = max(height[left], left_max)
+            right_max = max(height[right], right_max)
+
+            if left_max <= right_max:
+                water += left_max - height[left]
+                left += 1
+            else:
+                water += right_max - height[right]
+                right -= 1
+
         return water
             
             
