@@ -48,22 +48,40 @@ for i in (1~len)                 1부터 시작
 class Solution:
     def lengthOfLongestSubstring(self, arr: str) -> int:
         
-        if arr == "":       return 0  # 1번 해결용
-        elif len(arr) == 1: return 1  # 2번 해결용
+        # 책 솔루션 코드 - 나랑 생각한 방식은 같은데 나는 리스트를 또 씀, 여기는 투포인터로 수학적 계산만 함
+        ans = {}
+        answer = pointer1 = 0
         
-        arr = list(arr)               # 만약을 대비한 공백도 인식
-        
-        ans = [arr[0]]
-        answer = 0
-        for i in range(1,len(arr)):
-            if arr[i-1] == arr[i]:
-                ans.clear()
-                ans.append(arr[i])
-            elif arr[i] in ans:
-                ans = ans[ans.index(arr[i])+1:] + list(arr[i])
+        for i, key in enumerate(arr):
+            # 이미 등장했던 문자라면 'pointer1'위치를 오른쪽으로 이동
+            if key in ans and pointer1 <= ans[key]:
+                pointer1 = ans[key] + 1
+            # 아니면 최대 부분문자열 길이 갱신
             else:
-                ans.append(arr[i])
+                answer = max(answer, i-pointer1 + 1)
                 
-            answer = max(answer, len(ans))
-        
+            # 현재 문자 위치를 해시테이블에 추가
+            ans[key] = i
+            
         return answer
+        
+#         # 내가 푼 코드
+#         if arr == "":       return 0  # 1번 해결용
+#         elif len(arr) == 1: return 1  # 2번 해결용
+        
+#         arr = list(arr)               # 만약을 대비한 공백도 인식
+        
+#         ans = [arr[0]]
+#         answer = 0
+#         for i in range(1,len(arr)):
+#             if arr[i-1] == arr[i]:
+#                 ans.clear()
+#                 ans.append(arr[i])
+#             elif arr[i] in ans:
+#                 ans = ans[ans.index(arr[i])+1:] + list(arr[i])
+#             else:
+#                 ans.append(arr[i])
+                
+#             answer = max(answer, len(ans))
+        
+#         return answer
