@@ -14,19 +14,18 @@
 ### 알고리즘 및 방법
 
 ```
-(주의) 소문자로 바꿔주는걸 가장 먼저 했어야함 --> 히든테케
-lower()
+소문자로 바꾼다 <-- 히든테케 1번 때문에 가장 먼저 수행
 
-if 금지어가 하나라도 있으면
-    A
+특수문자를 " "로 제거한다 <-- 히든테케 2번 때문에 " "로 제거해야함(안그럼 애들이 달라붙음)
 
-특수기호 제거 ("!?',;.")   <-- 조건에 있었음
+" "를 기준으로 분리해서 리스트로 만든다 <-- 히든테케 3번 때문에 banned 제거 전에 수행
 
-B
+리스트에 banned가 있으면 제거해준다
 
-return B.most_common(1)
+counter
+
+return most_common(1)
 ```
-
 ### 히든테케
 ```
 1)
@@ -57,33 +56,43 @@ from collections import Counter
 class Solution:
     def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
         
-        # paragraph ="abc abc? abcd the jeff!"
-        # banned = ["abc","abcd","jeff"]
+        # 책 솔루션 - 정규식 사용 (중요) - 외워야함 이건
         
-        # 내가 푼 - 2차
-        paragraph = paragraph.lower()
+        '''
+        정규식에서 \w 는 단어문자를 뜻하며, ^은 not을 의미한다.
+        따라서 다음 정규식은 단어문자가 아닌 모든 문자를 공백으로 치환하는 역할을 한다
+        '''
+        
+        words = [word for word in re.sub(r'[^\w]', ' ', paragraph).lower().split() if word not in banned]
+        
+        c = Counter(words)
                 
-        for i in ("!", "?", "'", ",", ";", "."):
-            paragraph = paragraph.replace(i, " ")  # 히든테케 2 --> " "
+        return c.most_common(1)[0][0]
         
-        # 히든테케 3 때문에 먼저 리스트 만들고 일일히 비교 (replace 사용 불가)
-        paragraph = paragraph.split()    
+#         # 내가 푼 - 2차
+#         paragraph = paragraph.lower()
+                
+#         for i in ("!", "?", "'", ",", ";", "."):
+#             paragraph = paragraph.replace(i, " ")  # 히든테케 2 --> " "
         
-        if banned:
-            for i in range(len(banned)):
-                for j in range(len(paragraph)):
-                    if banned[i] == paragraph[j]:
-                        paragraph[j] = ""
+#         # 히든테케 3 때문에 먼저 리스트 만들고 일일히 비교 (replace 사용 불가)
+#         paragraph = paragraph.split()    
         
-        c = Counter(paragraph)
+#         if banned:
+#             for i in range(len(banned)):
+#                 for j in range(len(paragraph)):
+#                     if banned[i] == paragraph[j]:
+#                         paragraph[j] = ""
         
-        if len(c) > 1 and c.most_common(1)[0][0] == "":
-            return c.most_common(2)[1][0]
-        else:        
-            return c.most_common(1)[0][0] 
+#         c = Counter(paragraph)
+        
+#         if len(c) > 1 and c.most_common(1)[0][0] == "":
+#             return c.most_common(2)[1][0]
+#         else:        
+#             return c.most_common(1)[0][0] 
     
     
-#         # 내가 푼 - 히든테케땜에 틀리게된 케이스 
+#         # 내가 푼 - 1차 - 히든테케땜에 틀리게된 케이스 
 #         paragraph = paragraph.lower()
         
 #         if banned:
