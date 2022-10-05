@@ -35,30 +35,32 @@
 '''
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        # 2) 라이브러리 사용
+        return list(itertools.permutations(nums))
+    
+#         # 1) DFS 풀이
+#         results = []
+#         prev_elements = []
         
-        # 1) DFS 풀이
-        results = []
-        prev_elements = []
-        
-        def dfs(elements):
-            # A. 리프 노드일 때 결과 추가
-            if len(elements) == 0:
-                results.append(prev_elements[:])   # deepcopy를 이용해 복사 중요
+#         def dfs(elements):
+#             # A. 리프 노드일 때 결과 추가
+#             if len(elements) == 0:
+#                 results.append(prev_elements[:])   # deepcopy를 이용해 복사 중요
             
-            # B. 순열 생성 재귀 호출 (루트->인터널 이동하며 path기록)
-            for e in elements:
-                # 앞에서부터 하나씩만 빼보며 모든 경우의 수에 대한 dfs
-                next_elements = elements[:]        # deepcopy를 이용해 복사 중요
-                next_elements.remove(e)            # 슬라이싱할거기 때문에 remove사용 (1개남을 경우 [1:]하면 out of range)
+#             # B. 순열 생성 재귀 호출 (루트->인터널 이동하며 path기록)
+#             for e in elements:
+#                 # 앞에서부터 하나씩만 빼보며 모든 경우의 수에 대한 dfs
+#                 next_elements = elements[:]        # deepcopy를 이용해 복사 중요
+#                 next_elements.remove(e)            # 슬라이싱할거기 때문에 remove사용 (1개남을 경우 [1:]하면 out of range)
                 
-                prev_elements.append(e)
+#                 prev_elements.append(e)
                 
-                dfs(next_elements)
-                prev_elements.pop()                # dfs 완전히 끝까지 간게 끝나면 결과에 path추가했으니, prev는 pop해야함
+#                 dfs(next_elements)
+#                 prev_elements.pop()                # dfs 완전히 끝까지 간게 끝나면 결과에 path추가했으니, prev는 pop해야함
         
-        dfs(nums)  #(= permutations(nums, len(nums)) 임)
+#         dfs(nums)  #(= permutations(nums, len(nums)) 임)
                 
-        return results
+#         return results
         
         
         '''
